@@ -84,3 +84,7 @@ ditto -c -k --sequesterRsrc --keepParent build/ClaudeUsageBar.app dist/ClaudeUsa
 ## アンインストール
 
 メニューから「終了」→「アプリケーション」フォルダの ClaudeUsageBar.app をゴミ箱へ。
+
+## ライセンス
+
+[MIT License](LICENSE)
