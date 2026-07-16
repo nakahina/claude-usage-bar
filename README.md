@@ -32,9 +32,8 @@ claude
 1. 上記の「必須の前提条件」を済ませる
 2. [Releases](../../releases/latest) から `ClaudeUsageBar.zip` をダウンロードして解凍する
 3. 出てきた `ClaudeUsageBar.app` を「アプリケーション」フォルダにドラッグする
-4. **アプリケーションフォルダの中の ClaudeUsageBar を右クリック →「開く」** を選ぶ
-   - 通常の起動（ダブルクリック）だと「開発元が未確認」で弾かれます。**必ず右クリックから「開く」を選んでください**（初回のみ）
-   - それでも「壊れているため開けません」と出た場合は、システム設定 →「プライバシーとセキュリティ」を開き、下の方にある「このまま開く」を押してください
+4. ダブルクリックで起動する
+   - 署名・公証済みアプリなので「"ClaudeUsageBar"はインターネットからダウンロードされたアプリです。開いてもよろしいですか？」という穏やかな確認だけで開けます。「開く」を押してください
 5. 起動時に2つの許可を求められます:
    - **キーチェーンへのアクセス** → 「**常に許可**」（使用量の取得に必要。ログイン情報を読むだけで外部には送りません）
    - **通知の許可** → 「**許可**」
@@ -57,12 +56,18 @@ claude
 
 ## 開発者向け：ソースからビルドする場合
 
-Xcode（またはCommand Line Tools）が必要です。
+Xcode（またはCommand Line Tools）だけあれば、ad-hoc署名でビルドできます（配布用の署名・公証はスキップされます）。
 
 ```bash
 ./build.sh          # build/ClaudeUsageBar.app が出来る
 ./install.command    # ビルドして /Applications にインストール・起動まで自動
 ```
+
+配布用に署名・公証したい場合は、Apple Developer Program（Developer ID Application証明書）が必要です。
+
+1. `cp build.local.sh.example build.local.sh`
+2. `build.local.sh` を自分の証明書名・公証プロファイル名に書き換える（このファイルはgitignore対象です）
+3. `./build.sh` を実行すると、ビルド→署名→公証→stapleまで自動で行われます（公証待ちで数分かかります）
 
 設定を変えたいときは [Sources/main.swift](Sources/main.swift) 先頭の `Config` を編集してから再ビルドしてください。
 

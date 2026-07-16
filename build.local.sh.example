@@ -1,0 +1,12 @@
+# このファイルを build.local.sh としてコピーし、自分のDeveloper ID証明書名に書き換えてください。
+# build.local.sh はgitignore対象なので、個人情報がリポジトリに含まれることはありません。
+#
+# 1. Xcode → Settings → Accounts → Manage Certificates... で
+#    「Developer ID Application」証明書を作成する
+# 2. `security find-identity -v -p codesigning` で証明書名を確認する
+# 3. `xcrun notarytool store-credentials "任意のプロファイル名" \
+#      --apple-id "..." --team-id "..." --password "App用パスワード"`
+#    で公証用の認証情報を保存する
+
+SIGN_IDENTITY="Developer ID Application: あなたの名前 (TEAMID)"
+NOTARY_PROFILE="任意のプロファイル名"
