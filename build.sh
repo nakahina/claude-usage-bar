@@ -5,6 +5,7 @@ cd "$(dirname "$0")"
 
 APP_NAME="ClaudeUsageBar"
 APP_DIR="build/${APP_NAME}.app"
+MIN_OS="13.0" # Info.plistのLSMinimumSystemVersionと必ず合わせること
 
 # 署名・公証の設定は個人情報を含むため build.local.sh（gitignore対象）に分離している。
 # 初回は build.local.sh.example をコピーして自分の証明書名に書き換えること。
@@ -19,7 +20,7 @@ fi
 rm -rf "$APP_DIR"
 mkdir -p "$APP_DIR/Contents/MacOS" "$APP_DIR/Contents/Resources"
 
-swiftc -O -swift-version 5 \
+swiftc -target "arm64-apple-macos${MIN_OS}" -O -swift-version 5 \
   Sources/main.swift \
   -o "$APP_DIR/Contents/MacOS/$APP_NAME" \
   -framework AppKit \
